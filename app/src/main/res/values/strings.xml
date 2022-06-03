@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Todoish</string>
+    <string name="add_todo">Add Todo</string>
+    <string name="today">Today</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_task">Create Task</string>
+    <string name="task_title">Task Title</string>
+    <string name="description">Description</string>
+    <string name="submit_title">Create</string>
+    <string name="due_date">Due Date</string>
+    <string name="todo_description_indicator">Todo Description Indicator</string>
+    <string name="category_hint">Category</string>
+    <string name="no_upcoming_task_found">No Upcoming Task Found</string>
+    <string name="no_task_completed">No Task Completed</string>
+    <string name="no_failed_task_found">No Failed Task Found</string>
+    <string name="no_task_found">No Task Found</string>
+    <string name="task_color">Task Color</string>
+    <string name="time_label">Time:</string>
+    <string name="edit_action_button">edit action button</string>
+    <string name="complete_action_button">complete action button</string>
+    <string name="delete_todo">Delete Todo</string>
+    <string name="button_to_delete_todo_description">Button to delete todo</string>
+</resources>

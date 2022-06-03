@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/mainFragment">
+
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.todoish.ui.components.MainFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_todoFormFragment"
+            app:destination="@id/todoFormFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/todoFormFragment"
+        android:name="com.example.todoish.ui.components.TodoFormFragment"
+        tools:layout="@layout/fragment_todo_form" >
+        <action
+            android:id="@+id/action_todoFormFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <argument
+            android:name="todoId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+</navigation>

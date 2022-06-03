@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.google.android.material.color.MaterialColors" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <import type="com.google.android.material.R" />
+
+        <variable
+            name="task"
+            type="com.example.todoish.data.model.Todo" />
+
+        <variable
+            name="viewmodel"
+            type="com.example.todoish.ui.viewmodel.MainViewModel" />
+
+        <variable
+            name="cardColor"
+            type="String" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/todo_view"
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="@{viewmodel.isBefore(task.dateDue) ? MaterialColors.getColor(context, R.attr.colorSurface, R.attr.colorSurface) : viewmodel.color(task.color)}"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="@{viewmodel.isBefore(task.dateDue) ? 0.0f : 6.0f}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/task_title_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:paddingVertical="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/icon_indicator"
+                app:layout_constraintEnd_toStartOf="@+id/leading_view"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_weight="0.60">
+
+                <TextView
+                    android:id="@+id/label_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{task.title}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@{viewmodel.isBefore(task.dateDue) ? MaterialColors.getColor(context, R.attr.colorOnSurface, R.attr.colorOnSurface) : ContextCompat.getColor(context, com.example.todoish.R.color.black)}"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="12dp" />
+
+                <TextView
+                    android:id="@+id/label_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{task.description}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:lines="1"
+                    android:textColor="@{viewmodel.isBefore(task.dateDue) ? MaterialColors.getColor(context, R.attr.colorOnSurface, R.attr.colorOnSurface) : ContextCompat.getColor(context, com.example.todoish.R.color.disableTextColor)}"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/icon_indicator"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/leading_view"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/task_title_view"
+                app:layout_constraintVertical_weight="0.40">
+
+                <ImageView
+                    android:id="@+id/icon_description"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/todo_description_indicator"
+                    app:srcCompat="@drawable/ic_round_calendar_today_24" />
+
+                <TextView
+                    android:id="@+id/label_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="12dp"
+                    android:text="@{viewmodel.formatDate(task.dateDue, `dd MMM yyyy hh:mm a`)}"
+                    android:textColor="@{viewmodel.isBefore(task.dateDue) ? MaterialColors.getColor(context, R.attr.colorOnSurface, R.attr.colorOnSurface) : ContextCompat.getColor(context, com.example.todoish.R.color.black)}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/leading_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/edit_btn"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    app:icon="@drawable/ic_round_edit_24"
+                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                    android:contentDescription="@string/edit_action_button"
+                    app:iconTint="@color/black"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:visibility="@{viewmodel.isBefore(task.dateDue) || task.isCompleted ? View.GONE : View.VISIBLE}"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/complete_btn"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    app:icon="@drawable/ic_baseline_radio_button_unchecked_24"
+                    app:iconTint="?android:attr/textColorTertiary"
+                    android:contentDescription="@string/complete_action_button"
+                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:visibility="@{task.isCompleted || viewmodel.isBefore(task.dateDue) || viewmodel.isNotToday(task.dateDue) ? View.GONE : View.VISIBLE}"
+                    />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

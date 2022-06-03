@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <import type="com.google.android.material.color.MaterialColors" />
+        <variable
+            name="viewmodel"
+            type="com.example.todoish.ui.viewmodel.FormViewModel" />
+    </data>
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.components.TodoFormFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/form_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/create_task"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/delete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                android:layout_gravity="end"
+                app:icon="@drawable/ic_round_delete_24"
+                android:contentDescription="@string/button_to_delete_todo_description"
+                app:iconTint="?attr/colorError"
+                android:background="?controlBackground"
+                android:onClick="@{() -> viewmodel.deleteTask()}"
+                android:visibility="@{viewmodel.newTask ? View.GONE : View.VISIBLE}"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toTopOf="@+id/submit_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/form_appbar">
+
+            <LinearLayout
+                android:id="@+id/form_fields"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:paddingVertical="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:text="@string/task_color"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        android:textColor="?attr/colorControlNormal"
+                        android:textStyle="bold" />
+
+                    <io.github.mrherintsoahasina.flextools.FlexRadioGroup
+                        android:id="@+id/color_select"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:alignItems="center"
+                        app:checkedButton="@{viewmodel.colorId}"
+                        app:onColorCheckedChanged="@{viewmodel.onColorCheckedChanged}"
+                        app:flexWrap="wrap">
+
+                        <RadioButton
+                            android:id="@+id/color1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:background="@null"
+                            android:checked="true"
+                            android:button="@drawable/card_selector"
+                            android:buttonTint="@color/lavender" />
+
+                        <RadioButton
+                            android:id="@+id/color2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:background="@null"
+                            android:button="@drawable/card_selector"
+                            android:buttonTint="@color/safe_02" />
+
+                        <RadioButton
+                            android:id="@+id/color3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:background="@null"
+                            android:button="@drawable/card_selector"
+                            android:buttonTint="@color/green" />
+
+                        <RadioButton
+                            android:id="@+id/color4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:background="@null"
+                            android:button="@drawable/card_selector"
+                            android:buttonTint="@color/red" />
+
+                        <RadioButton
+                            android:id="@+id/color5"
+                            style="@null"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:background="@null"
+                            android:button="@drawable/card_selector"
+                            android:buttonTint="@color/yellow" />
+
+                        <RadioButton
+                            android:id="@+id/color6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:background="@null"
+                            android:button="@drawable/card_selector"
+                            android:buttonTint="@color/violet" />
+
+                        <RadioButton
+                            android:id="@+id/color7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:background="@null"
+                            android:button="@drawable/card_selector"
+                            android:buttonTint="@color/pink" />
+
+                        <RadioButton
+                            android:id="@+id/color8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:background="@null"
+                            android:button="@drawable/card_selector"
+                            android:buttonTint="@color/peach" />
+                    </io.github.mrherintsoahasina.flextools.FlexRadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:text="@string/task_title"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        android:textColor="?attr/colorControlNormal"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxCornerRadiusBottomEnd="6dp"
+                        app:boxCornerRadiusBottomStart="6dp"
+                        app:boxCornerRadiusTopEnd="6dp"
+                        app:boxCornerRadiusTopStart="6dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:hintEnabled="false">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edittext_task_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:importantForAutofill="no"
+                            android:inputType="textShortMessage"
+                            android:text="@={viewmodel.title}"
+                            android:paddingVertical="13dp"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <io.github.mrherintsoahasina.flextools.FlexRadioGroup
+                    android:id="@+id/category_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    app:alignContent="flex_start"
+                    app:alignItems="flex_start"
+                    app:flexCheckedButton="@{viewmodel.categoryId}"
+                    app:onCategoryCheckedChanged="@{viewmodel.onCategoryCheckedChanged}"
+                    app:flexWrap="wrap">
+
+                    <RadioButton
+                        android:id="@+id/category1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/category"
+                        android:button="@null"
+                        android:checked="true"
+                        android:padding="8dp"
+                        android:text="No Category"
+                        android:textColor="@{viewmodel.isCategoryEqualTo(com.example.todoish.R.id.category1) ? MaterialColors.getColor(context, com.google.android.material.R.attr.colorOnSecondary, com.google.android.material.R.attr.colorOnSecondary) : MaterialColors.getColor(context, com.google.android.material.R.attr.colorOnBackground, com.google.android.material.R.attr.colorOnBackground)}"
+                        android:textFontWeight="500" />
+
+                    <RadioButton
+                        android:id="@+id/category2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/category"
+                        android:button="@null"
+                        android:padding="8dp"
+                        android:text="Work"
+                        android:textColor="@{viewmodel.isCategoryEqualTo(com.example.todoish.R.id.category2) ? MaterialColors.getColor(context, com.google.android.material.R.attr.colorOnSecondary, com.google.android.material.R.attr.colorOnSecondary) : MaterialColors.getColor(context, com.google.android.material.R.attr.colorOnBackground, com.google.android.material.R.attr.colorOnBackground)}" />
+
+                    <RadioButton
+                        android:id="@+id/category3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/category"
+                        android:button="@null"
+                        android:padding="8dp"
+                        android:text="Personal"
+                        android:textColor="@{viewmodel.isCategoryEqualTo(com.example.todoish.R.id.category3) ? MaterialColors.getColor(context, com.google.android.material.R.attr.colorOnSecondary, com.google.android.material.R.attr.colorOnSecondary) : MaterialColors.getColor(context, com.google.android.material.R.attr.colorOnBackground, com.google.android.material.R.attr.colorOnBackground)}" />
+
+                    <RadioButton
+                        android:id="@+id/category4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/category"
+                        android:button="@null"
+                        android:padding="8dp"
+                        android:text="Wishlist"
+                        android:textColor="@{viewmodel.isCategoryEqualTo(com.example.todoish.R.id.category4) ? MaterialColors.getColor(context, com.google.android.material.R.attr.colorOnSecondary, com.google.android.material.R.attr.colorOnSecondary) : MaterialColors.getColor(context, com.google.android.material.R.attr.colorOnBackground, com.google.android.material.R.attr.colorOnBackground)}" />
+
+                    <RadioButton
+                        android:id="@+id/category5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/category"
+                        android:button="@null"
+                        android:padding="8dp"
+                        android:text="Birthday"
+                        android:textColor="@{viewmodel.isCategoryEqualTo(com.example.todoish.R.id.category5) ? MaterialColors.getColor(context, com.google.android.material.R.attr.colorOnSecondary, com.google.android.material.R.attr.colorOnSecondary) : MaterialColors.getColor(context, com.google.android.material.R.attr.colorOnBackground, com.google.android.material.R.attr.colorOnBackground)}" />
+                </io.github.mrherintsoahasina.flextools.FlexRadioGroup>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:text="@string/description"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        android:textColor="?attr/colorControlNormal"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxCornerRadiusBottomEnd="6dp"
+                        app:boxCornerRadiusBottomStart="6dp"
+                        app:boxCornerRadiusTopEnd="6dp"
+                        app:boxCornerRadiusTopStart="6dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:hintEnabled="false">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edittext_task_desc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top|start"
+                            android:importantForAutofill="no"
+                            android:inputType="textLongMessage|textMultiLine"
+                            android:text="@={viewmodel.description}"
+                            android:lines="3"
+                            android:paddingVertical="13dp"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp" />
+
+                <CalendarView
+                    android:id="@+id/calendar_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:date="@{viewmodel.dateDue.time}"
+                    app:onSelectedDateChange="@{viewmodel.onDateChangeListener}"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_label"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="@color/material_on_surface_emphasis_medium"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxCornerRadiusBottomEnd="6dp"
+                        app:boxCornerRadiusBottomStart="6dp"
+                        app:boxCornerRadiusTopEnd="6dp"
+                        app:boxCornerRadiusTopStart="6dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:hintEnabled="false">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edittext_time"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|end"
+                            android:focusable="false"
+                            android:hint="Time"
+                            android:text="@{viewmodel.dateToString(viewmodel.dateDue)}"
+                            android:onClick="@{() -> viewmodel.timePicker(context)}"
+                            android:inputType="none"
+                            android:paddingVertical="12dp"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/submit_title"
+            android:onClick="@{() -> viewmodel.saveTask()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
