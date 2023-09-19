@@ -30,7 +30,7 @@ List any prerequisites or requirements that users and developers need to have in
 
 - [Android Studio][1]
 - Android SDK
-- [JDK][9]
+- [JDK (version 17)][9]
 
 ## Installation
 
