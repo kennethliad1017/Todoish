@@ -89,7 +89,7 @@
                         android:layout_height="wrap_content"
                         app:alignItems="center"
                         app:checkedButton="@{viewmodel.colorId}"
-                        app:onColorCheckedChanged="@{viewmodel.onColorCheckedChanged}"
+                        app:onColorCheckedChanged="@{viewmodel::onColorCheckedChanged}"
                         app:flexWrap="wrap">
 
                         <RadioButton
@@ -216,7 +216,7 @@
                     app:alignContent="flex_start"
                     app:alignItems="flex_start"
                     app:flexCheckedButton="@{viewmodel.categoryId}"
-                    app:onCategoryCheckedChanged="@{viewmodel.onCategoryCheckedChanged}"
+                    app:onCategoryCheckedChanged="@{viewmodel::onCategoryCheckedChanged}"
                     app:flexWrap="wrap">
 
                     <RadioButton
@@ -337,7 +337,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:date="@{viewmodel.dateDue.time}"
-                    app:onSelectedDateChange="@{viewmodel.onDateChangeListener}"/>
+                    app:onSelectedDateChange="@{viewmodel::onDateChangeListener}"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

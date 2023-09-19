@@ -1,8 +1,12 @@
 package com.example.todoish.data.model
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import java.util.*
+import java.util.Date
 
 @Dao
 interface TodoDao {
@@ -22,15 +26,15 @@ interface TodoDao {
     @Query("SELECT * FROM todo_table WHERE uid = :id")
     fun getTodoById(id: Int): Todo?
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun createTodo(todo: Todo)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun createTodo(todo: Todo): Unit
 
     @Query("UPDATE todo_table SET isCompleted = :completed WHERE  uid = :id")
-    suspend fun updateTodo(completed: Boolean, id: Int)
+    suspend fun updateTodo(completed: Boolean, id: Int): Unit
 
     @Update
-    suspend fun editTodo(todo: Todo)
+    suspend fun editTodo(todo: Todo): Unit
 
     @Query("DELETE FROM todo_table WHERE uid = :id")
-    suspend fun removeTodoById(id: Int)
+    suspend fun removeTodoById(id: Int): Unit
 }
